@@ -1,0 +1,25 @@
+.display {
+  width: 100%;
+  max-width: 75%;
+  padding: 15px;
+  margin: auto;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+}
+form {
+  position: relative;
+  top: 20px;
+}
+.header.users {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+.status {
+  padding-left: 100px;
+}
+#status{
+  font-size: 20px;
+  color: red;
+}

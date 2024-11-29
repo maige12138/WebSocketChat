@@ -1,0 +1,152 @@
+body {
+  background-color: #f5f5f5;
+  font-family: Arial, sans-serif;
+  margin: 10px;
+  padding: 20px;
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+#showList {
+  width: 30%;
+  height: 100%;
+  border-right: 2px solid #ccc;
+}
+.showList-messages {
+  padding: 20px;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+#showList h3,
+#channel-name {
+  margin-top: 0;
+  font-size: 1.2em;
+}
+
+#showList ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.channel,
+#showList li {
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: #eee;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.channel {
+  cursor: pointer;
+}
+
+.channel.active {
+  font-weight: bold;
+}
+
+.channel:hover {
+  text-decoration: underline;
+}
+
+.timestamp {
+  float: right;
+  color: gray;
+  font-size: 0.9em;
+}
+
+#chat {
+  width: 70%;
+  height: 100%;
+}
+
+#chat-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+#message-form {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+
+#message-input {
+  height: 30px;
+  flex-grow: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+#message-list {
+  flex-grow: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 10px;
+  margin: 10px;
+  box-sizing: border-box;
+
+  background: transparent;
+}
+
+#message-list li {
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: #eee;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+
+  width: fit-content;
+  max-width: 90%;
+
+  opacity: 1;
+}
+
+#timestamp {
+  float: right;
+  font-size: 0.8em;
+}
+
+#online-users, #current_window {
+  font-size: 1.25rem; /* 设置字体大小为h5的大小 */
+  color: #fff; /* 设置字体颜色为白色 */
+  transition: color 0.2s ease-in-out; /* 动画过渡效果 */
+}
+#online-users:hover, #current_window:hover {
+  color: #000; /* 鼠标移上去时字体颜色变为黑色 */
+}
+
+.btn-success {
+  background-color: #3e8e41;
+  border-color: #3e8e41;  
+}
+
+.noshow {
+  opacity: 0;
+}
+.chat-message {
+  display: inline-block;
+  min-width: fit-content;
+  max-width: 100%;
+
+  opacity: 1;
+}
+
+#alertContainer {
+  position: fixed;
+  top: 20%;
+  right: 0;
+  z-index: 9999;
+
+  width: 300px;
+  height: 100px;
+}

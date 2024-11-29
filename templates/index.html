@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>WebSocket聊天室</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/5.2.3/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/resource/chat.css') }}">
+    <style>
+      body {
+        background: url('../static/image/bg.jpg') no-repeat center center fixed;
+        background-size: cover;
+      }
+    </style>
+  </head>
+  <body data-username="{{ username }}" class="bg-light">
+    <div class="container-fluid h-100 d-flex align-items-center">
+      <div class="row w-100" style="height: 90%;">
+
+        <div id="showList" class="col-3 h-100">
+          <div class="my-3">
+            <h1>Channels</h1>
+            <hr class="my-2 bg-white" style="height: 3px;">
+            <div class="btn-group-vertical w-100 gap-1">
+              <a href="{{ url_for('set_active_channel', channel_name='Channel 1') }}" {% if active_channel == 'Channel 1' %}class="btn btn-success active"{% else %}class="btn btn-success"{% endif %} data-channel="Channel 1">频道-1</a>
+              <a href="{{ url_for('set_active_channel', channel_name='Channel 2') }}" {% if active_channel == 'Channel 2' %}class="btn btn-success active"{% else %}class="btn btn-success"{% endif %} data-channel="Channel 2">频道-2</a>
+              <a href="{{ url_for('set_active_channel', channel_name='Channel 3') }}" {% if active_channel == 'Channel 3' %}class="btn btn-success active"{% else %}class="btn btn-success"{% endif %} data-channel="Channel 3">频道-3</a>
+            </div>
+          </div>
+          <div class="my-3">
+            <div class="d-flex flex-row align-items-center">
+              <div class="col-8 h1">Friend List</div>
+              <div class="col-4 h5">好友数量：<span id="friend-count">0</span></div>
+            </div>
+            <hr class="my-2 bg-white" style="height: 3px;">
+            <ul id="friend-list-container" class="list-unstyled"></ul>
+          </div>
+        </div>
+
+        <div id="chat" class="col-9 h-100 d-flex flex-column">
+          <div id="chat-container" class="flex-grow-1 overflow-auto">
+            <div class="p-3 bg-success text-white rounded d-flex flex-row align-items-center justify-content-space" id="channel-name">
+              <div class="col-10">
+                <a type="button" class="btn m-auto" id="current_window">
+                  {{ current_channel }}
+                </a>
+              </div>
+              <div class="col-2">
+                <a type="button" class="btn m-auto" id="online-users" data-bs-toggle="modal" data-bs-target="#userList">
+                </a>
+              </div>
+            </div>
+
+            <!-- 模态框 -->
+            <div class="modal fade" id="userList">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5>当前在线用户</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                  </div>
+
+                  <div class="modal-body text-center">
+                    <ul id="user-list" class="list-unstyled list-group">
+                        <div class="spinner-border spinner-border-md  text-success"></div>
+                    </ul>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">关闭</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- 消息列表 -->
+            <ul id="message-list" class="list-unstyled"></ul>
+
+            <form id="message-form" class="input-group mb-3">
+              <input type="text" id="message-input" name="message" autocomplete="off" class="form-control" style="height: 50px;">
+              
+              <div class="input-group" style="width: 20%;">
+                <input type="file" id="image-input" name="image" accept="image/*" class="form-control form-control-sm" style="height: 50px;">
+              </div>
+
+              <div class="input-group-append">
+                <button id="send-btn" type="submit" class="btn btn-success" style="height: 50px;">发送</button>
+                <button id="clear-btn" type="submit" class="btn btn-secondary" style="height: 50px;">清除</button>
+                <button id="logout-btn" type="submit" class="btn btn-danger"style="height: 50px;">登出</button>                
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <script src="https://cdn.socket.io/4.2.0/socket.io.min.js"></script>
+      <script src="https://cdn.staticfile.org/bootstrap/5.2.3/js/bootstrap.bundle.min.js"></script>
+      <script src="{{ url_for('static', filename='/resource/chat.js') }}"></script>
+      <!-- 提示框 -->
+      <div id="alertContainer"></div>
+    </body>
+</html>
